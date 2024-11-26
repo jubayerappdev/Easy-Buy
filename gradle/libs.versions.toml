@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.7.2"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -16,6 +16,11 @@ firebaseFirestore = "25.1.1"
 firebaseStorage = "21.0.1"
 firebaseMessaging = "24.1.0"
 firebaseAnalytics = "22.1.2"
+navigationFragmentKtx = "2.8.4"
+navigationUiKtx = "2.8.4"
+ssp-android= "1.1.1"
+sdp-android= "1.1.1"
+lottie="6.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +37,15 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "ssp-android" }
+sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdp-android" }
+lottie= { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+
+
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

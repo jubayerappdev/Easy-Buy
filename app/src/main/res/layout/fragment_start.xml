@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".views.starter.StartFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+        app:lottie_rawRes="@raw/ecom_1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:layout_margin="@dimen/_8sdp"
+        android:textColor="#FF5722"
+        android:fontFamily="@font/bebas_neue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome to Easy Buy App" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        app:strokeColor="#FF5722"
+        android:fontFamily="@font/poppins"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_32sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        android:text="Login"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/btnRegister"
+        app:strokeColor="#FF5722"
+        android:fontFamily="@font/poppins"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_32sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        android:text="Register"
+        android:textStyle="bold" />
+
+
+
+</LinearLayout>
