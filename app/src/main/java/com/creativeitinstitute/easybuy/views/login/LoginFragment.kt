@@ -1,38 +1,25 @@
 package com.creativeitinstitute.easybuy.views.login
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.creativeitinstitute.easybuy.R
+import com.creativeitinstitute.easybuy.base.BaseFragment
+import com.creativeitinstitute.easybuy.core.DataState
 import com.creativeitinstitute.easybuy.databinding.FragmentLoginBinding
-import com.creativeitinstitute.easybuy.databinding.FragmentRegisterBinding
 import com.creativeitinstitute.easybuy.isEmpty
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
 
-class LoginFragment : Fragment() {
-
-    lateinit var binding: FragmentLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun setListener() {
 
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-        setListener()
-        return binding.root
-    }
-
-    private fun setListener() {
-
-        with(binding){
+        with(binding) {
             btnRegister.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
@@ -41,11 +28,42 @@ class LoginFragment : Fragment() {
                 etPassword.isEmpty()
 
 
-                if (!etEmail.isEmpty() && !etPassword.isEmpty()){
+                if (!etEmail.isEmpty() && !etPassword.isEmpty()) {
 
                     Toast.makeText(context, "All input done !", Toast.LENGTH_LONG).show()
+                    val user = UserLogin(
+                        etEmail.text.toString(),
+                        etPassword.text.toString()
+                    )
+                    viewModel.userLogin(user)
+                    loading.show()
                 }
             }
+        }
+
+
+    }
+
+    override fun allObserver() {
+        viewModel.loginResponse.observe(viewLifecycleOwner){
+
+            when(it){
+                is DataState.Error -> {
+                    loading.dismiss()
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+                is DataState.Loading -> {
+                    loading.show()
+
+                }
+                is DataState.Success -> {
+                    loading.dismiss()
+                    Toast.makeText(context, "created User : ${it.data}", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_dashFragment)
+
+                }
+            }
+
         }
 
 

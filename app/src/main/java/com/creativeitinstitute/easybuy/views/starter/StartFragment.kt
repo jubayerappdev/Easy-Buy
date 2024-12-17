@@ -7,27 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.creativeitinstitute.easybuy.R
+import com.creativeitinstitute.easybuy.base.BaseFragment
 import com.creativeitinstitute.easybuy.databinding.FragmentStartBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class StartFragment : BaseFragment<FragmentStartBinding>(FragmentStartBinding::inflate) {
 
 
-class StartFragment : Fragment() {
 
-    private lateinit var binding: FragmentStartBinding
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentStartBinding.inflate(inflater, container, false)
-
-        setListener()
-
-        return binding.root
-    }
-
-    private fun setListener() {
+    override fun setListener() {
 
         with(binding){
             btnLogin.setOnClickListener {
@@ -39,6 +28,11 @@ class StartFragment : Fragment() {
 
             }
         }
+
+
+    }
+
+    override fun allObserver() {
 
 
     }
