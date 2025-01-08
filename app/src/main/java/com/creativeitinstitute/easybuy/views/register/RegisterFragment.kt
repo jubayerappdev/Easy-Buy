@@ -1,11 +1,6 @@
 package com.creativeitinstitute.easybuy.views.register
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,7 +10,7 @@ import com.creativeitinstitute.easybuy.base.BaseFragment
 import com.creativeitinstitute.easybuy.core.DataState
 import com.creativeitinstitute.easybuy.databinding.FragmentRegisterBinding
 import com.creativeitinstitute.easybuy.isEmpty
-import com.creativeitinstitute.easybuy.views.dashboard.DashFragment
+import com.creativeitinstitute.easybuy.views.dashboard.seller.SellerDashboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -83,7 +78,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                     loading.dismiss()
                     Toast.makeText(context, "created User : ${it.data}", Toast.LENGTH_LONG).show()
 
-                    findNavController().navigate(R.id.action_registerFragment_to_dashFragment)
+                    startActivity(Intent(requireContext(), SellerDashboard::class.java))
+                    requireActivity().finish()
 
 
                 }

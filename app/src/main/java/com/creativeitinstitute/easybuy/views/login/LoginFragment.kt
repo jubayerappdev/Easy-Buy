@@ -1,5 +1,6 @@
 package com.creativeitinstitute.easybuy.views.login
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -8,6 +9,7 @@ import com.creativeitinstitute.easybuy.base.BaseFragment
 import com.creativeitinstitute.easybuy.core.DataState
 import com.creativeitinstitute.easybuy.databinding.FragmentLoginBinding
 import com.creativeitinstitute.easybuy.isEmpty
+import com.creativeitinstitute.easybuy.views.dashboard.seller.SellerDashboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,7 +61,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 is DataState.Success -> {
                     loading.dismiss()
                     Toast.makeText(context, "created User : ${it.data}", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_loginFragment_to_dashFragment)
+                    startActivity(Intent(requireContext(), SellerDashboard::class.java))
+                    requireActivity().finish()
 
                 }
             }
