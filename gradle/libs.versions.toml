@@ -21,6 +21,9 @@ navigationUiKtx = "2.8.4"
 ssp-android= "1.1.1"
 sdp-android= "1.1.1"
 lottie="6.6.0"
+imagepicker = "2.1"
+activity-ktx = "1.9.3"
+fragment-ktx = "1.8.4"
 
 
 hilt="2.51.1"
@@ -47,6 +50,9 @@ sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "s
 lottie= { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 hilt-android= { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler= { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+imagepicker= { group = "com.github.dhaval2404", name = "imagepicker", version.ref = "imagepicker" }
+activity-ktx= { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
+fragment-ktx= { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
 
 
 
