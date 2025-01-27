@@ -7,17 +7,28 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import com.creativeitinstitute.easybuy.base.BaseFragment
+import com.creativeitinstitute.easybuy.core.DataState
 import com.creativeitinstitute.easybuy.core.areAllPermissionGranted
 import com.creativeitinstitute.easybuy.core.extract
 import com.creativeitinstitute.easybuy.core.requestPermission
 import com.creativeitinstitute.easybuy.data.Product
 import com.creativeitinstitute.easybuy.databinding.FragmentUploadProductBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.UUID
 
+@AndroidEntryPoint
 class UploadProductFragment :
     BaseFragment<FragmentUploadProductBinding>(FragmentUploadProductBinding::inflate) {
 
+        private val product : Product by lazy() {
+            Product()
+        }
+
+        private val viewModel: ProductUploadViewModel by viewModels()
 
     override fun setListener() {
 
@@ -30,17 +41,26 @@ class UploadProductFragment :
             }
 
             btnUploadProduct.setOnClickListener {
+
+                loading.show()
                 val name = etProductName.extract()
                 val price = etProductPrice.extract()
                 val description = etProductDescription.extract()
                 val amount = etProductAmount.extract()
 
-                val product = Product(
-                    name = name,
-                    price = price.toDouble(),
-                    description = description,
-                    amount = amount.toInt()
-                )
+                FirebaseAuth.getInstance().currentUser?.let {
+                    product.apply {
+                        this.productID = UUID.randomUUID().toString()
+                        this.sellerID = it.uid
+                        this.name = name
+                        this.price = price.toDouble()
+                        this.description = description
+                        this.amount = amount.toInt()
+                    }
+                }
+
+
+
 
                 uploadProduct(product)
 
@@ -75,10 +95,27 @@ class UploadProductFragment :
 
     private fun uploadProduct(product: Product) {
 
+        viewModel.productUpload(product)
 
     }
 
     override fun allObserver() {
+        viewModel.productUploadResponse.observe(viewLifecycleOwner){
+
+            when(it){
+                is DataState.Error -> {
+                    loading.dismiss()
+                }
+                is DataState.Loading -> {
+                    loading.show()
+                }
+                is DataState.Success -> {
+                    Toast.makeText(requireContext(), it.data, Toast.LENGTH_LONG).show()
+                    loading.dismiss()
+                }
+            }
+        }
+
 
 
     }
@@ -104,6 +141,7 @@ class UploadProductFragment :
 
                 Log.d("TAG", "$fileUri ")
                 binding.ivProduct.setImageURI(fileUri)
+                product.imageLink = fileUri.toString()
 
 
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
